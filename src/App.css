@@ -1,0 +1,161 @@
+.app {
+  width: 100vw;
+  height: 100vh;
+  background-image: url('./assets/images/background.png');
+  overflow-x: hidden;
+}
+
+.header {
+  background: linear-gradient(90deg, rgba(126, 24, 255, 0) 17.88%, #8D59F5 42.36%, #B4FFDB 100%);
+  height: 71px;
+  width: 100%;
+}
+
+.widget {
+  box-sizing: border-box;
+  /* Auto layout */
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 5px;
+  position: relative;
+  max-width: 638px;
+  width: 100%;
+  padding: 42px 5px 15px;
+  background: rgba(31, 31, 31, 0.85);
+  box-shadow: 0px 20px 10px -3px rgba(213, 213, 213, 0.4), inset 10px 10px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px !important;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.widget.white {
+  background: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .widget {
+    box-shadow: none;
+    background: transparent;
+  }
+  /* For mobile phones: */
+  .widget::after {
+    display: none;
+  }
+}
+
+.widget::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  content: '';
+  background-image: url(./assets/images/border.png);
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.widget .widget-container {
+  max-width: 340px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 100%;
+}
+
+.widget .widget-container .flag {
+  width: 24px !important;
+  height: 24px !important;
+  margin-right: 0.5rem !important;
+}
+
+.checkbox {
+  display: block;
+  float: left;
+  margin-top: 4px;
+  margin-right: 5px;
+  -webkit-appearance: none;
+  position: relative;
+  width: 18px;
+  height: 18px;
+  border-radius: 4px;
+  background: white;
+  cursor: pointer;
+}
+
+.checkbox:checked{
+  background: linear-gradient(180deg, #CDA5FF 0%, #7E18FF 76.04%);
+}
+
+.carousel img {
+  width: inherit;
+}
+
+input::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: white;
+  opacity: 1; /* Firefox */
+}
+
+.PhoneInput {
+  flex: 1;
+}
+
+.PhoneInputCountry {
+  color: white;
+}
+
+.PhoneInputInput {
+  background-color: transparent;
+  user-select: none;
+  color: white;
+  outline: none;
+}
+
+.p-2 {
+  padding: 0.5rem !important;
+}
+
+.widget .ml-2 {
+  margin-left: 0.5rem !important;
+}
+
+.widget .mr-2 {
+  margin-right: 0.5rem !important;
+}
+
+.widget .pl-2 {
+  padding-left: 0.5rem !important;
+}
+
+.widget .pr-2 {
+  padding-right: 0.5rem !important;
+}
+
+.react-datepicker__year-read-view--down-arrow, .react-datepicker__month-read-view--down-arrow, .react-datepicker__month-year-read-view--down-arrow {
+  top: 6px !important;
+}
+
+.react-datepicker__navigation-icon::before {
+  top: 16px;
+}
+
+p.BasicParagraph, li.BasicParagraph, div.BasicParagraph, .pt__signature {
+  color: white !important;
+}
+
+.coinfella .PhoneInputInput {
+  width: 100%;
+}
+
+.coinfella .PhoneInputInput::placeholder {
+  color: #d1d5db;
+} 
+
+.coinfella .flag {
+  width: 24px !important;
+  height: 24px !important;
+  margin-right: 0.5rem !important;
+}

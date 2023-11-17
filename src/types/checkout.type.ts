@@ -1,0 +1,32 @@
+export interface CheckoutInfo {
+  cost: string;
+  tipType: "percent" | "cash";
+  tipAmount: string;
+  fee: number;
+  feeType: "percent" | "cash";
+  feeMethod: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  auth?: string;
+  password?: string;
+  phoneNumber: string;
+  streetAddress: string;
+  streetAddress2?: string;
+  city: string;
+  state: string;
+  postalCode: string;
+  country: string;
+  isValidCard: boolean;
+  isConfirmedPurchase: boolean;
+  walletAddress: string;
+  token: string;
+  dob?: Date;
+  gender?: string;
+  ssn?: string;
+  userEmail: string;
+  userPhoneNumber: string;
+  signedAgreementId: string;
+  cardBin: string;
+  cardBrand: string;
+}
