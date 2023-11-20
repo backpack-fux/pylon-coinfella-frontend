@@ -284,6 +284,7 @@ export const CheckoutProvider = (props: {
   }, [checkoutRequestError])
 
   useEffect(() => {
+    setFieldValue('walletAddress', checkoutData?.checkout?.walletAddress || checkoutRequest?.checkoutRequest?.walletAddress || '', false)
     setFieldValue('firstName', checkoutData?.checkout?.firstName || checkoutRequest?.checkoutRequest?.firstName || user?.firstName || '', false)
     setFieldValue('lastName', checkoutData?.checkout?.lastName || checkoutRequest?.checkoutRequest?.lastName || user?.lastName || '', false)
     setFieldValue('email', checkoutData?.checkout?.email || checkoutRequest?.checkoutRequest?.email || user?.email || '', false)
