@@ -17,6 +17,7 @@ import { CheckoutProvider } from './context/checkout';
 import { CoinFella } from './pages';
 
 function App() {
+
   return (
     <BrowserRouter>
       <ApolloProvider client={apolloClient}>
