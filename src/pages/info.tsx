@@ -34,10 +34,6 @@ export const CoinFellaInformation = () => {
       !values.walletAddress
   }, [errors, values])
 
-  console.log(isInValid)
-  console.log(values)
-  console.log(errors)
-
   return <div className="pt-3">
     <h3 className="text-white text-xl">Information</h3>
     <div className="border-b-2 border-gray-300 mt-4 mb-5"></div>

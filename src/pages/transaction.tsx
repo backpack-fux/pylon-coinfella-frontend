@@ -12,7 +12,7 @@ import VisaIcon from '../assets/images/visa-icon.png';
 const explorerUri = process.env.REACT_APP_EXPLORER_URL || 'https://mumbai.polygonscan.com'
 
 export const CoinFellaTransaction = () => {
-  const { checkoutInfo, transaction, checkoutRequest } = useCheckout()
+  const { checkoutInfo, transaction, checkoutRequest, onRetry } = useCheckout()
   const { values } = checkoutInfo
   const tipAmount = useMemo(() => calcTip(values), [values]);
   const subTotal = useMemo(() => (Number(values.cost || 0) + tipAmount).toFixed(2), [values, tipAmount])
@@ -86,10 +86,10 @@ export const CoinFellaTransaction = () => {
           </div>
         </div>
       </div>
-      {(transaction || transaction?.paidStatus === 'processing') && (
+      {(!transaction || transaction?.paidStatus === 'processing' || transaction?.paidStatus === 'pending') && (
         <div className="flex mt-2">
           <ClockLoader size={20} color='white' />
-          <div className="text-white ml-2 items-center">{transaction.message || 'Processing...'}</div>
+          <div className="text-white ml-2 items-center">{transaction?.message || 'Processing...'}</div>
         </div>
       )}
       {transaction?.paidStatus === 'error' && (
@@ -97,6 +97,14 @@ export const CoinFellaTransaction = () => {
       )}
       {transaction?.paidStatus === 'paid' && (
         <div className='text-green-500 mt-2'>{transaction.message}</div>
+      )}
+      {transaction?.paidStatus === 'error' && (
+        <button
+          onClick={() => onRetry()}
+          className={`mt-4 text-lg text-center w-full rounded-md h-12 border-2 border-white flex items-center justify-center bg-white text-black`}
+        >
+          Retry
+        </button>
       )}
     </div>
   </div>
