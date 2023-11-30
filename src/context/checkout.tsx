@@ -55,6 +55,7 @@ interface CheckoutContextProps {
   onProcessKyc: () => void;
   setRequestId: (value: string | undefined) => void;
   onSetUser: (value: any) => void;
+  onRetry: () => void;
 }
 
 const CheckoutContext = createContext<CheckoutContextProps>({
@@ -64,7 +65,8 @@ const CheckoutContext = createContext<CheckoutContextProps>({
   onCreateAccount: () => { },
   onProcessKyc: () => { },
   setRequestId: (value: string | undefined) => { },
-  onSetUser: (value: any) => { }
+  onSetUser: (value: any) => { },
+  onRetry: () => { }
 });
 
 export const useCheckout = () => {
@@ -84,6 +86,7 @@ export const CheckoutProvider = (props: {
   const storedCheckoutId = useMemo(() => searchParams.get('id'), [searchParams])
   const externalUserId = useMemo(() => searchParams.get('externalUserId'), [searchParams])
   const partnerId = useMemo(() => searchParams.get('partnerId'), [searchParams])
+  const [isRetry, setIsRetry] = useState(false)
   const [checkout, setCheckout] = useState<any>()
   const [transaction, setTransaction] = useState<any>();
   const [isProcessingKyc, setIsKycProcessing] = useState(false)
@@ -195,6 +198,10 @@ export const CheckoutProvider = (props: {
       })
     }
   }
+
+  const onRetry = useCallback(() => {
+    window.location.href = `/${checkoutRequestId}?retry=true`
+  }, [checkoutRequestId])
 
   const checkoutInfo = useFormik<CheckoutInfo>({
     initialValues: {
@@ -412,16 +419,20 @@ export const CheckoutProvider = (props: {
   }, [checkoutData])
 
   useEffect(() => {
-    if (checkoutRequest?.checkoutRequest?.checkout) {
+    if (checkoutRequest?.checkoutRequest?.checkout && !isRetry) {
       setCheckout(checkoutRequest?.checkoutRequest?.checkout)
     }
-  }, [checkoutRequest])
+  }, [checkoutRequest, isRetry])
 
   useEffect(() => {
     if (checkout?.transaction) {
       setTransaction(checkout?.transaction)
     }
   }, [checkout])
+
+  useEffect(() => {
+    setIsRetry(searchParams.get('retry') === 'true')
+  }, [])
 
   useEffect(() => {
     setTransaction(transactionResponse?.subscription?.payload)
@@ -438,7 +449,7 @@ export const CheckoutProvider = (props: {
         refetchCheckout()
       }
     }
-  }, [isWindowFocused, storedCheckoutId])
+  }, [isWindowFocused])
 
   const isLoading = useMemo(() => isProcessingKyc || isCreatingAccount || isCheckingOut || isGettingKycLink, [isProcessingKyc, isCreatingAccount, isCheckingOut, isGettingKycLink])
   const loadingMessage = useMemo(() => {
@@ -464,6 +475,7 @@ export const CheckoutProvider = (props: {
     onProcessKyc,
     setRequestId,
     onSetUser,
+    onRetry,
   }), [
     user,
     checkoutRequestId,
@@ -478,7 +490,8 @@ export const CheckoutProvider = (props: {
     onSetUser,
     onCreateAccount,
     onProcessKyc,
-    setRequestId
+    setRequestId,
+    onRetry
   ])
 
   return (
