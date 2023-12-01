@@ -84,6 +84,8 @@ export const CheckoutProvider = (props: {
   let [searchParams, setSearchParams] = useSearchParams();
 
   const storedCheckoutId = useMemo(() => searchParams.get('id'), [searchParams])
+  const externalUserId = useMemo(() => searchParams.get('externalUserId'), [searchParams])
+  const partnerId = useMemo(() => searchParams.get('partnerId'), [searchParams])
   const [isRetry, setIsRetry] = useState(false)
   const [checkout, setCheckout] = useState<any>()
   const [transaction, setTransaction] = useState<any>();
@@ -336,6 +338,8 @@ export const CheckoutProvider = (props: {
           postalCode: values.postalCode,
           country: values.country,
           signedAgreementId: values.signedAgreementId,
+          externalUserId,
+          partnerId
         }
       }
     })
