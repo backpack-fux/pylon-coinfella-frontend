@@ -18,15 +18,17 @@ export const CoinFellaTransaction = () => {
   const subTotal = useMemo(() => (Number(values.cost || 0) + tipAmount).toFixed(2), [values, tipAmount])
 
   useEffect(() => {
-    if (checkoutRequest?.checkoutRequest && transaction)
+    if (checkoutRequest?.checkoutRequest && transaction) {
       window.parent.postMessage(JSON.stringify({
         type: 'order',
         action: 'update',
         data: {
           id: checkoutRequest.checkoutRequest?.id,
+          partnerOrderId: checkoutRequest.checkoutRequest?.partnerOrderId,
           status: transaction.paidStatus
         }
       }), "*");
+    }
   }, [checkoutRequest, transaction])
 
   return <div className="pt-3">
