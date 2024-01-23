@@ -1,13 +1,13 @@
+import React, { useEffect, useMemo, useState } from "react";
 import { useQuery } from "@apollo/client";
-import { useEffect, useMemo, useState } from "react";
 import DatePicker from "react-datepicker";
-import PhoneInput from 'react-phone-number-input';
 import FadeLoader from 'react-spinners/FadeLoader';
+import PhoneInput from 'react-phone-number-input';
 
-import { stateList } from "../constants/state";
-import { useAgreement } from "../context/agreement";
 import { useCheckout } from "../context/checkout";
+import { useAgreement } from "../context/agreement";
 import { GET_AGREEMENT_LINK } from "../utils/graphql";
+import { stateList } from "../constants/state";
 
 export const CoinFellaSignup = () => {
   const { checkoutInfo, onCreateAccount, isLoading, loadingMessage } = useCheckout()
@@ -168,7 +168,7 @@ export const CoinFellaSignup = () => {
               value={values.state}
               onBlur={() => setFieldTouched('state', true)}
               onChange={(e) => setFieldValue('state', e.target.value)}
-              className="bg-transparent placeholder-white text-lg outline-none w-full"
+              className="bg-transparent placeholder-white text-lg outline-none w-full" placeholder="State"
             >
               <option className='text-black' value="">State</option>
               {stateList.map((state) => <option className='text-black' key={state.value} value={state.value}>{state.value}</option>)}

@@ -1,7 +1,8 @@
+import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import { CoinFellaSignup } from "./singup";
 import { useCheckout } from "../context/checkout";
 import { CoinFellaKYC } from "./kyc";
-import { CoinFellaSignup } from "./signup";
 
 export const CoinFellaSignupRouter = () => {
   const { user } = useCheckout()
