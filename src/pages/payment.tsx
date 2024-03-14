@@ -1,5 +1,5 @@
-import React, { useEffect, useRef, useState } from "react";
 import { CardNumber, Cvv, ExpiryDate, Frames } from 'frames-react';
+import { useEffect, useRef, useState } from "react";
 import ClockLoader from 'react-spinners/ClockLoader';
 
 import { useCheckout } from "../context/checkout";
@@ -158,7 +158,7 @@ export const CoinFellaPayment = () => {
       <div className="mt-6 mb-2 text-left">
         <label className="text-white text-xs cursor-pointer select-none">
           <input className="checkbox" type="checkbox" checked={values.isConfirmedPurchase} onChange={(e) => setFieldValue('isConfirmedPurchase', e.target.checked)} />
-          Confirm your intent to use <span className="text-pink-500">Visa / Mastercard</span> checkout by checking the signature box. You can view your customer rights by reviewing our <a onClick={(e) => e.stopPropagation()} className="text-purple-500 underline" href="https://www.mybackpack.app/terms-of-service" target="_blank">terms of service (TOS)</a> and <a onClick={(e) => e.stopPropagation()} className="text-purple-500 underline" href="https://www.mybackpack.app/privacy-policy" target="_blank">privacy policy (PP)</a>.
+          Confirm your intent to use <span className="text-pink-500">Visa / Mastercard</span> checkout by checking the signature box. You can view your customer rights by reviewing our <a onClick={(e) => e.stopPropagation()} className="text-purple-500 underline" href="https://backpack.network/terms-of-service" target="_blank">terms of service (TOS)</a> and <a onClick={(e) => e.stopPropagation()} className="text-purple-500 underline" href="https://backpack.network/privacy-policy" target="_blank">privacy policy (PP)</a>.
         </label>
         {touched.isConfirmedPurchase && errors.isConfirmedPurchase && <div className='text-red-400 text-[12px] text-left'>{errors.isConfirmedPurchase}</div>}
       </div>
