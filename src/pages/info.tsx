@@ -104,21 +104,23 @@ export const CoinFellaInformation = () => {
           />
           {touched.country && errors.country && <div className='text-red-400 text-[12px] text-left'>{errors.country}</div>}
         </div>
-        <div className="flex-1">
-          <p className="text-gray-200 text-md text-left mb-2">State</p>
-          <div className="outline-none border-2 border-gray-300 rounded-md h-11 w-full flex items-center justify-center text-white text-lg shadow-sm bg-transparent p-2 placeholder-gray-300">
-            <select
-              value={values.state}
-              onBlur={() => setFieldTouched('state', true)}
-              onChange={(e) => setFieldValue('state', e.target.value)}
-              className="bg-transparent placeholder-white text-lg outline-none w-full" placeholder="State"
-            >
-              <option className='text-black' value="">State</option>
-              {stateList.map((state) => <option className='text-black' key={state.value} value={state.value}>{state.value}</option>)}
-            </select>
-          </div>
-          {touched.state && errors.state && <div className='text-red-400 text-[12px] text-left'>{errors.state}</div>}
-        </div>
+		<div className="flex-1">
+			<p className="text-gray-200 text-md text-left mb-2">State</p>
+			<div className="outline-none border-2 border-gray-300 rounded-md h-11 w-full flex items-center justify-center text-white text-lg shadow-sm bg-transparent p-2">
+				<select
+				value={values.state}
+				onBlur={() => setFieldTouched('state', true)}
+				onChange={(e) => setFieldValue('state', e.target.value)}
+				className="bg-transparent placeholder-white text-lg outline-none w-full"
+				>
+				<option value="" className="text-gray-400">Select State</option>
+				{stateList.map((state) => (
+					<option key={state.value} value={state.value}>{state.label}</option>
+				))}
+			</select>
+		</div>
+		{touched.state && errors.state && <div className='text-red-400 text-[12px] text-left'>{errors.state}</div>}
+		</div>
       </div>
       <div className="flex gap-2">
         <div className="flex-1">
