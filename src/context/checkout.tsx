@@ -241,7 +241,7 @@ export const CheckoutProvider = (props: {
 
   useEffect(() => {
     if (checkoutError) {
-      // toast.error(checkoutError.message)
+      toast.error(checkoutError.message)
       setFieldValue('isValidCard', false)
       setFieldValue('token', '')
       setFieldValue('cardBrand', '')
