@@ -1,41 +1,47 @@
 import React, { useEffect, useMemo } from "react";
-import _ from 'lodash';
-import moment from 'moment-timezone';
+import _ from "lodash";
+import moment from "moment-timezone";
 import { toast } from "react-toastify";
-import { CopyToClipboard } from 'react-copy-to-clipboard';
-import ClockLoader from 'react-spinners/ClockLoader';
+import { CopyToClipboard } from "react-copy-to-clipboard";
+import ClockLoader from "react-spinners/ClockLoader";
 
 import { useCheckout } from "../context/checkout";
 import { calcTip } from "../utils";
-import UsFlagImage from '../assets/images/us-flag.png';
-import VisaIcon from '../assets/images/visa-icon.png';
-const explorerUri = process.env.REACT_APP_EXPLORER_URL || 'https://mumbai.polygonscan.com'
+import UsFlagImage from "../assets/images/us-flag.png";
+import VisaIcon from "../assets/images/visa-icon.png";
+const explorerUri =
+  process.env.REACT_APP_EXPLORER_URL || "https://mumbai.polygonscan.com";
 
 export const CoinFellaTransaction = () => {
-  const { checkoutInfo, transaction, checkoutRequest, onRetry } = useCheckout()
-  const { values } = checkoutInfo
+  const { checkoutInfo, transaction, checkoutRequest, onRetry } = useCheckout();
+  const { values } = checkoutInfo;
   const tipAmount = useMemo(() => calcTip(values), [values]);
-  const subTotal = useMemo(() => (Number(values.cost || 0) + tipAmount).toFixed(2), [values, tipAmount])
+  const subTotal = useMemo(
+    () => (Number(values.cost || 0) + tipAmount).toFixed(2),
+    [values, tipAmount]
+  );
 
   useEffect(() => {
-    if (checkoutRequest?.checkoutRequest && transaction) {
-      window.parent.postMessage(JSON.stringify({
-        type: 'order',
-        action: 'update',
+    window.parent.postMessage(
+      JSON.stringify({
+        type: "transaction",
+        action: "update",
         data: {
-          id: checkoutRequest.checkoutRequest?.id,
-          partnerOrderId: checkoutRequest.checkoutRequest?.partnerOrderId,
-          status: transaction.paidStatus
-        }
-      }), "*");
-    }
-  }, [checkoutRequest, transaction])
+          id: checkoutRequest?.checkoutRequest?.id,
+          partnerOrderId: checkoutRequest?.checkoutRequest?.partnerOrderId,
+          status: transaction?.paidStatus,
+        },
+      }),
+      "*"
+    );
+  }, [checkoutRequest, transaction]);
 
-  return <div className="pt-3">
-    <h3 className="text-white text-xl">Transaction</h3>
-    <div className="border-b-2 border-gray-300 mt-4 mb-5"></div>
-    <div className="flex-1 flex flex-col justify-between gap-2">
-      <div>
+  return (
+    <div className="pt-3">
+      {/* <h3 className="text-white text-xl">Transaction</h3>
+    <div className="border-b-2 border-gray-300 mt-4 mb-5"></div> */}
+      <div className="flex-1 flex flex-col justify-between gap-2">
+        {/* <div>
         <p className="text-gray-300 text-lg text-left">Amount</p>
         <div className="flex w-full">
           <div className="border-white border-2 rounded-md h-11 bg-transparent flex-1 text-white text-md text-right text-lg p-2 shadow-sm shadow-white">
@@ -99,15 +105,16 @@ export const CoinFellaTransaction = () => {
       )}
       {transaction?.paidStatus === 'paid' && (
         <div className='text-green-500 mt-2'>{transaction.message}</div>
-      )}
-      {transaction?.paidStatus === 'error' && (
-        <button
-          onClick={() => onRetry()}
-          className={`mt-4 text-lg text-center w-full rounded-md h-12 border-2 border-white flex items-center justify-center bg-white text-black`}
-        >
-          Retry
-        </button>
-      )}
+      )} */}
+        {transaction?.paidStatus === "error" && (
+          <button
+            onClick={() => onRetry()}
+            className={`mt-4 text-lg text-center w-full rounded-md h-12 border-2 border-white flex items-center justify-center bg-white text-black`}
+          >
+            Retry
+          </button>
+        )}
+      </div>
     </div>
-  </div>
-}
+  );
+};

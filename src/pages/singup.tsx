@@ -65,7 +65,7 @@ export const CoinFellaSignup = () => {
   }, [agreementLink])
 
   return <div className="relative pt-3">
-    <h3 className="text-white text-xl">Register</h3>
+    <h3 className="text-white text-xl">KYC Registration</h3>
     <div className="border-b-2 border-gray-300 mt-4 mb-5"></div>
     <div className="flex flex-col gap-2">
       <div className="flex gap-2">
